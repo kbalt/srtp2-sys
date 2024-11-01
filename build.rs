@@ -8,12 +8,12 @@ fn main() {
     let mut bindgen_builder = bindgen::Builder::default()
         .clang_args(&["-I./libsrtp/include"])
         .header("wrapper.h")
-        .whitelist_function("(srtp|SRTP|srtcp|SRTCP)_.*")
-        .whitelist_type("(srtp|SRTP|srtcp|SRTCP)_.*")
-        .whitelist_var("(srtp|SRTP|srtcp|SRTCP)_.*");
+        .allowlist_function("(srtp|SRTP|srtcp|SRTCP)_.*")
+        .allowlist_type("(srtp|SRTP|srtcp|SRTCP)_.*")
+        .allowlist_var("(srtp|SRTP|srtcp|SRTCP)_.*");
 
     if !cfg!(feature = "enable-openssl") {
-        bindgen_builder = bindgen_builder.blacklist_item(".*(192|gcm|GCM).*")
+        bindgen_builder = bindgen_builder.blocklist_item(".*(192|gcm|GCM).*")
     }
 
     bindgen_builder
